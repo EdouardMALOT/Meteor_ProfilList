@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import EmployeeList from './components/employee_list.js';
 
 const App = () => {
   return(
-    <div>Hello Aix</div>
+    <EmployeeList />
   );
 }
 
