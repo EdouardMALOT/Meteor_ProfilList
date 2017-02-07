@@ -18,8 +18,14 @@ Meteor.startup(() => {
 
         //Add it to the DB
           Employees.insert({   name, email, phone, avatar: image.avatar() });
-          
+
       });
     }
+
+/*
+    Meteor.publish('employees', function() {
+      return Employees.find({}, { limit: 20});
+    });
+*/
 
 });
