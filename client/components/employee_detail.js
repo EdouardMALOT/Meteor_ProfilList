@@ -6,7 +6,7 @@ const EmployeeList = ({employee}) => {
     const { name, phone, email, avatar } = employee;
 
     return(
-        <div>
+        <div className="thumbnail">
             <img src={avatar} />
             <div className="caption">
                 <h3>{name}</h3>
