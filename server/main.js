@@ -23,8 +23,19 @@ Meteor.startup(() => {
     }
 
 
-    Meteor.publish('employees', function(nb_employer) {
-      return Employees.find({}, { limit: nb_employer});
+    Meteor.publish('employees', function(nb_employer, search) {
+
+        let qry = "{}";
+/*
+        if(search) {
+          let field_name = "name";
+          let field_value = "/man/";
+          qry = "{\"" + field_name + "\":\"" + field_value + "\"}";
+        }
+*/
+        console.log(JSON.parse(qry));
+        
+      return Employees.find(JSON.parse(qry), { limit: nb_employer});         
     });
 
 });

@@ -4,31 +4,22 @@ import { Employees} from '../../imports/collections/employee';
 import EmployeeDetail from './employee_detail';
 
 
-const PER_PAGE = 10;
+const PER_PAGE = 9;
 
 class EmployeeList extends React.Component {
 
     componentWillMount() {
         this.nbTimeCliked = 1;
-        console.log('nb clicked = ', this.nbTimeCliked);
     }
 
     OnButtonClicked() {
         this.nbTimeCliked++;
-        Meteor.subscribe('employees', PER_PAGE*this.nbTimeCliked);
-        console.log('nb clicked = ', this.nbTimeCliked);
+        Meteor.subscribe('employees', PER_PAGE*this.nbTimeCliked, this.refs.input.value);
     }
 
     submitHandler(event) {
         event.preventDefault();
-        Meteor.call('link.insert', this.refs.input.value, (error) => {
-            if(error){
-                this.setState({ error: 'You url is not valid'});            //Display error msg
-            }else{
-                this.setState({ error: ''});                                //Reset error msg
-                this.refs.input.value = '';
-            }
-        });
+        Meteor.subscribe('employees', PER_PAGE*this.nbTimeCliked, this.refs.input.value);
     }
 
     render() {
@@ -49,7 +40,7 @@ class EmployeeList extends React.Component {
 
                 <button 
                     onClick={this.OnButtonClicked.bind(this)}
-                    className="btn btn-primary">
+                    className="btn btn-danger btn_load_more">
                         Load More...
                 </button>
 
@@ -67,7 +58,7 @@ export default createContainer( () => {
 
     //Return object set as props
         return { 
-            employees: Employees.find({}).fetch()
+            employees: Employees.find({}, { limit: 100}).fetch()
         };
 
 }, EmployeeList);
