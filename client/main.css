@@ -9,3 +9,11 @@
 .thumbnail {
     width: 300px;
 }
+
+.form{
+    display: flex;
+}
+
+.form button {
+    margin-left: 10px;
+}
